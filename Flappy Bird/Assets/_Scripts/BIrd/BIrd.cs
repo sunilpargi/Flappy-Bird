@@ -112,6 +112,7 @@ public class BIrd : MonoBehaviour
 				isAlive = false;
 				anim.SetTrigger("Bird Died");
 				audioSource.PlayOneShot(diedClip);
+				UIController.instance.PlayerDiedShowScore(score);
 				
 			}
 		}
@@ -124,7 +125,7 @@ public class BIrd : MonoBehaviour
 		{
 			Debug.Log("bird passed");
 			score++;
-
+			UIController.instance.SetScore(score);
 			audioSource.PlayOneShot(pointClip);
 		}
 	}
