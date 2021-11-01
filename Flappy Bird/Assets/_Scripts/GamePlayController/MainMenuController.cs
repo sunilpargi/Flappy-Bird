@@ -10,6 +10,7 @@ public class MainMenuController : MonoBehaviour
 	private GameObject[] birds;
 
 	private bool isGreenBirdUnlocked, isRedBirdUnlocked;
+	public AudioClip uITouch;
 	void Awake()
 	{
 		MakeInstance();
@@ -48,6 +49,7 @@ public class MainMenuController : MonoBehaviour
 
 			if (isGreenBirdUnlocked)
 			{
+				
 				birds[0].SetActive(false);
 				GameplayController.instance.SetSelectedBird(1);
 				birds[GameplayController.instance.GetSelectedBird()].SetActive(true);
@@ -59,7 +61,7 @@ public class MainMenuController : MonoBehaviour
 
 			if (isRedBirdUnlocked)
 			{
-
+				
 				birds[1].SetActive(false);
 				GameplayController.instance.SetSelectedBird(2);
 				birds[GameplayController.instance.GetSelectedBird()].SetActive(true);
@@ -67,7 +69,7 @@ public class MainMenuController : MonoBehaviour
 			}
 			else
 			{
-
+				
 				birds[1].SetActive(false);
 				GameplayController.instance.SetSelectedBird(0);
 				birds[GameplayController.instance.GetSelectedBird()].SetActive(true);
@@ -81,11 +83,12 @@ public class MainMenuController : MonoBehaviour
 			GameplayController.instance.SetSelectedBird(0);
 			birds[GameplayController.instance.GetSelectedBird()].SetActive(true);
 		}
-
+		AudioSource.PlayClipAtPoint(uITouch, Camera.main.transform.position);
 	}
 
 	public void PlayGame()
 	{
+		AudioSource.PlayClipAtPoint(uITouch, Camera.main.transform.position);
 		SceneFader.instance.FadeIn("Gameplay");
 	}
 }

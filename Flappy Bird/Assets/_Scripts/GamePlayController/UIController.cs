@@ -24,7 +24,7 @@ public class UIController : MonoBehaviour
 
 	[SerializeField]
 	private Image medalImage;
-
+	public AudioClip uITouch;
 	void Awake()
 	{
 		MakeInstance();
@@ -47,39 +47,45 @@ public class UIController : MonoBehaviour
 
 	public void PauseGame()
 	{
+		AudioSource.PlayClipAtPoint(uITouch, Camera.main.transform.position);
 		if (BIrd.instance != null)
 		{
 			if (BIrd.instance.isAlive)
 			{
 				pausePanel.SetActive(true);
-				gameOverText.gameObject.SetActive(false);
+				gameOverText.text = "Pause";
 				endScore.text = "" + BIrd.instance.score;
 				bestScore.text = "" + GameplayController.instance.GetHighscore();
-				Time.timeScale = 0f;
+				
 				restartGameButton.onClick.RemoveAllListeners();
 				restartGameButton.onClick.AddListener(() => ResumeGame());
+				Time.timeScale = 0f;
 			}
 		}
 	}
 
 	public void GoToMenuButton()
 	{
+		AudioSource.PlayClipAtPoint(uITouch, Camera.main.transform.position);
 		SceneFader.instance.FadeIn("MainMenu");
 	}
 
 	public void ResumeGame()
 	{
+		AudioSource.PlayClipAtPoint(uITouch, Camera.main.transform.position);
 		pausePanel.SetActive(false);
 		Time.timeScale = 1f;
 	}
 
 	public void RestartGame()
 	{
+		AudioSource.PlayClipAtPoint(uITouch, Camera.main.transform.position);
 		SceneFader.instance.FadeIn(Application.loadedLevelName);
 	}
 
 	public void PlayGame()
 	{
+		AudioSource.PlayClipAtPoint(uITouch, Camera.main.transform.position);
 		scoreText.gameObject.SetActive(true);
 		birds[GameplayController.instance.GetSelectedBird()].SetActive(true);
 		instructionsButton.gameObject.SetActive(false);
@@ -94,7 +100,7 @@ public class UIController : MonoBehaviour
 	public void PlayerDiedShowScore(int score)
 	{
 		pausePanel.SetActive(true);
-		gameOverText.gameObject.SetActive(true);
+		gameOverText.text = "Game over";
 		scoreText.gameObject.SetActive(false);
 
 		endScore.text = "" + score;

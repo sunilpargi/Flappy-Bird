@@ -108,7 +108,7 @@ public class BIrd : MonoBehaviour
 		{
 			if (isAlive)
 			{
-				Debug.Log(1);
+				
 				isAlive = false;
 				anim.SetTrigger("Bird Died");
 				audioSource.PlayOneShot(diedClip);
